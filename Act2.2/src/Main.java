@@ -1,9 +1,14 @@
 import java.io.File;
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Main {
 	static File f;
 	static String sTexto;
+	static String extension;
+	static String nombre;
+	static String nombreNue;
+	static String nombreArchivo;
 
 	/**
 	 * @param args
@@ -24,19 +29,106 @@ public class Main {
 
 		System.out.println("");
 		System.out.println("Archivos");
-		imprimirContenidoDirectorio(sTexto);
+		System.out.println(imprimirContenidoDirectorio(sTexto));
+
+		System.out.println("");
+		System.out.println("Introduzca Extension");
+		Scanner ext = new Scanner(System.in);
+		extension = ext.next();
+		System.out.println("Archivos con Extension" + " " + extension);
+		System.out.println(imprimirContenidoDirectorioExtension(sTexto,
+				extension));
+
+		System.out.println("");
+		System.out.println("Crear Directorio");
+		System.out.println("Introduzca Nombre de la Nueva Carpeta");
+		Scanner nom = new Scanner(System.in);
+		nombre = nom.next();
+		if(creaDirectorio(sTexto, nombre)){
+			System.out.println("Creado Correctamente");
+		}else System.out.println(" NO Creado");
+		
+		
+		System.out.println("");
+		System.out.println("Renombrar Directorio");
+		System.out.println("Introduzca Nuevo Nombre");
+		Scanner nomNue = new Scanner(System.in);
+		nombreNue = nomNue.next();
+		if(renombrarFichero(sTexto, nombreNue)){
+			System.out.println("Renombrado Correctamente");
+		}else System.out.println(" NO Renombrado");
+		
+		System.out.println("");
+		System.out.println("Crear Archivo Vacio");
+		System.out.println("Introduzca Nuevo Nombre");
+		Scanner nomA = new Scanner(System.in);
+		nombreArchivo = nomA.next();
+		if(touch(sTexto, nombreNue)){
+			System.out.println("Creado Correctamente");
+		}else System.out.println(" NO Creado");
 
 	}
 
-	private static String[] imprimirContenidoDirectorio(String sTexto4) {
+	private static boolean touch(String sTexto9, String nombreArchivo) {
+		crearFichero(sTexto9);
+		if(f.exists()){
+			File f2 = new File(sTexto9,nombreArchivo);
+			
+			return true;
+		}
+		return false;
+	}
+
+	private static boolean renombrarFichero(String sTexto8, String nombreNue2) {
+		crearFichero(sTexto8);
+		if(f.exists()){
+			File f2 = new File(sTexto8,nombreNue2);
+			f.renameTo(f2);
+			return true;
+		}
+		return false;
+	}
+
+	private static boolean creaDirectorio(String sTexto6, String sTexto7) {
+		crearFichero(sTexto6);
+		if (f.exists()) {
+			File directorio = new File(sTexto6,sTexto7);
+			directorio.mkdir();
+			return true;
+		} else {
+			return false;
+		}
+	}
+
+	private static ArrayList<String> imprimirContenidoDirectorioExtension(
+			String sTexto5, String extension2) {
+		crearFichero(sTexto5);
+		ArrayList<String> lista = new ArrayList<>();
+		if (f.exists()) {
+			String[] ficheros = f.list();
+			for (int i = 0; i < ficheros.length; i++) {
+				String fichero = ficheros[i];
+				if (fichero.indexOf(extension2) != -1) {
+					lista.add(fichero);
+				}
+			}
+
+		}
+		return lista;
+
+	}
+
+	private static String imprimirContenidoDirectorio(String sTexto4) {
 		crearFichero(sTexto4);
+		String s = null;
 		String[] archivos = f.list();
 
 		for (int j = 0; j < archivos.length; j++) {
-			System.out.println(archivos[j]);
+			s += archivos[j];
+			s += "\n";
 		}
 
-		return archivos;
+		return s;
 	}
 
 	private static String ruta(boolean absoluta) {
