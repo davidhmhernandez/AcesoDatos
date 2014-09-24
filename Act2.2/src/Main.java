@@ -16,7 +16,7 @@ public class Main {
 	public static void main(String[] args) {
 		introducirRuta();
 
-		System.out.println("¿Existe el Fichero?");
+		System.out.println("Â¿Existe el Fichero?");
 		existeFichero(sTexto);
 
 		System.out.println("");
@@ -144,6 +144,11 @@ public class Main {
 			return f.getPath();
 
 	}
+		/**
+	 * 
+	 * @param sTexto3
+	 * @return
+	 */
 
 	private static boolean absoluta(String sTexto3) {
 		crearFichero(sTexto3);
