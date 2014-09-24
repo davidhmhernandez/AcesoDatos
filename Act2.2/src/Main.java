@@ -117,6 +117,12 @@ public class Main {
 		return lista;
 
 	}
+	
+	/**
+	 * 
+	 * @param sTexto4
+	 * @return
+	 */
 
 	private static String imprimirContenidoDirectorio(String sTexto4) {
 		crearFichero(sTexto4);
