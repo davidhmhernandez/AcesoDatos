@@ -49,17 +49,6 @@ public class ActJUni22 {
 		f2.delete();
 
 	}
-	@Test
-	public void datosFichero2() {
-		String[] datos = Main.datosFichero("supercalifragilistico");
-
-		assertEquals(6, datos.length);
-		assertEquals("supercalifragilistico", datos[0]);
-		assertEquals("", datos[1]);
-		assertEquals("False", datos[2]);
-		assertEquals("False", datos[3]);
-		assertEquals(0, datos[4]);
-		assertEquals("", datos[5]);
-	}
+	
 
 }
