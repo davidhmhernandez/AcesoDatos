@@ -1,98 +1,154 @@
 import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+import javax.management.openmbean.OpenDataException;
+
 public class Main {
-	static File f;
-	static String sTexto;
-	static String extension;
-	static String nombre;
-	static String nombreNue;
-	static String nombreArchivo;
+	private static Scanner rutaF;
+	static String op = null;;
+	static boolean absoluta = false;
 
 	/**
 	 * @param args
 	 */
 	public static void main(String[] args) {
-		introducirRuta();
+		System.out.println("Introduzca Ruta del Fichero");
+		rutaF = new Scanner(System.in);
+		String fichero = rutaF.next();
 
-		System.out.println("Â¿Existe el Fichero?");
-		existeFichero(sTexto);
+		if (existeFichero(fichero)) {
+			System.out.println("El Fichero Existe");
+		} else
+			System.out.println("No existe el Fichero");
 
-		System.out.println("");
-		System.out.println("Datos");
-		datosFicheros(sTexto);
+		System.out.println("Introduzca Ruta del Fichero");
+		rutaF = new Scanner(System.in);
+		String ficheroDatos = rutaF.next();
+		datosFichero(ficheroDatos);
 
 		System.out.println("");
 		System.out.println("Ruta");
-		System.out.println(ruta(absoluta(sTexto)));
+		System.out.println("Introduzca Ruta del Fichero");
+		rutaF = new Scanner(System.in);
+		String rutaA = rutaF.next();
+		System.out.println("¿Que Ruta Desea Obtener? R-Relavita A-Absoluta");
+		Scanner opcion = new Scanner(System.in);
+		op = opcion.next();
+		if (op.equalsIgnoreCase("R")) {
+			absoluta = false;
+			System.out.println(ruta(absoluta, rutaA));
+		} else {
+			absoluta = true;
+			System.out.println(ruta(absoluta, rutaA));
+
+		}
 
 		System.out.println("");
-		System.out.println("Archivos");
-		System.out.println(imprimirContenidoDirectorio(sTexto));
+		System.out.println("Contenido del Directorio");
+		System.out.println("Introduzca Ruta del Directorio");
+		rutaF = new Scanner(System.in);
+		String rutaD = rutaF.next();
+		System.out.println(imprimirContenidoDirectorio(rutaD));
 
 		System.out.println("");
+		System.out.println("Contenido del Directorio Por Extension");
+		System.out.println("Introduzca Ruta del Directorio");
+		rutaF = new Scanner(System.in);
+		String rutaDir = rutaF.next();
 		System.out.println("Introduzca Extension");
-		Scanner ext = new Scanner(System.in);
-		extension = ext.next();
-		System.out.println("Archivos con Extension" + " " + extension);
-		System.out.println(imprimirContenidoDirectorioExtension(sTexto,
-				extension));
+		rutaF = new Scanner(System.in);
+		String rutaEx = rutaF.next();
+		System.out
+				.println(imprimirContenidoDirectorioExtension(rutaDir, rutaEx));
 
 		System.out.println("");
-		System.out.println("Crear Directorio");
-		System.out.println("Introduzca Nombre de la Nueva Carpeta");
-		Scanner nom = new Scanner(System.in);
-		nombre = nom.next();
-		if(creaDirectorio(sTexto, nombre)){
-			System.out.println("Creado Correctamente");
-		}else System.out.println(" NO Creado");
-		
-		
+		System.out.println("Crear Nueva Carpeta");
+		System.out.println("Introduzca Ruta");
+		rutaF = new Scanner(System.in);
+		String rutaCN = rutaF.next();
+		if (creaDirectorio(rutaCN)) {
+			System.out.println("Creada Correctamente");
+		} else
+			System.out.println("NO CREADA");
+
 		System.out.println("");
-		System.out.println("Renombrar Directorio");
-		System.out.println("Introduzca Nuevo Nombre");
-		Scanner nomNue = new Scanner(System.in);
-		nombreNue = nomNue.next();
-		if(renombrarFichero(sTexto, nombreNue)){
+		System.out.println("Renombrar Fichero");
+		System.out.println("Introduzca Ruta donde esta el Fichero");
+		rutaF = new Scanner(System.in);
+		String rutaFich = rutaF.next();
+		if (renombraFichero(rutaFich)) {
 			System.out.println("Renombrado Correctamente");
-		}else System.out.println(" NO Renombrado");
-		
+		} else
+			System.out.println("NO Renombrado");
+
 		System.out.println("");
 		System.out.println("Crear Archivo Vacio");
-		System.out.println("Introduzca Nuevo Nombre");
-		Scanner nomA = new Scanner(System.in);
-		nombreArchivo = nomA.next();
-		if(touch(sTexto, nombreNue)){
-			System.out.println("Creado Correctamente");
-		}else System.out.println(" NO Creado");
+		System.out.println("Introduzca Ruta donde crear el Archivo");
+		rutaF = new Scanner(System.in);
+		String rutaAr = rutaF.next();
+		if (touch(rutaAr)) {
+			System.out.println("Archivo Creado Correctamente");
+		} else
+			System.out.println("Archivo NO Creado");
+
+		System.out.println("");
+		System.out.println("Leer Texto");
+		System.out.println(leerLinea());
 
 	}
 
-	private static boolean touch(String sTexto9, String nombreArchivo) {
-		crearFichero(sTexto9);
-		if(f.exists()){
-			File f2 = new File(sTexto9,nombreArchivo);
-			
-			return true;
-		}
-		return false;
+	private static String leerLinea() {
+		System.out.println("Introduzca Texto");
+		rutaF = new Scanner(System.in);
+		String texto = rutaF.next();
+		return texto;
+
 	}
 
-	private static boolean renombrarFichero(String sTexto8, String nombreNue2) {
-		crearFichero(sTexto8);
-		if(f.exists()){
-			File f2 = new File(sTexto8,nombreNue2);
-			f.renameTo(f2);
-			return true;
-		}
-		return false;
-	}
-
-	private static boolean creaDirectorio(String sTexto6, String sTexto7) {
-		crearFichero(sTexto6);
+	private static boolean touch(String rutaAr) {
+		File f = new File(rutaAr);
 		if (f.exists()) {
-			File directorio = new File(sTexto6,sTexto7);
+			System.out.println("Introduzca Nombre del Archivo");
+			rutaF = new Scanner(System.in);
+			String nomAr = rutaF.next();
+			File ficheroNue = new File(rutaAr, nomAr);
+			try {
+				ficheroNue.createNewFile();
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+
+		} else
+			return false;
+		return true;
+	}
+
+	private static boolean renombraFichero(String rutaFich) {
+		File f = new File(rutaFich);
+		if (f.exists()) {
+			System.out.print("Nombre de archivo nuevo: ");
+			String nombreNue = rutaF.next();
+			File fNue = new File(rutaFich, nombreNue);
+			f.renameTo(fNue);
+		} else {
+			System.out.println("El Fichero No Existe");
+			return false;
+		}
+
+		return true;
+
+	}
+
+	private static boolean creaDirectorio(String rutaCN) {
+		File fichero = new File(rutaCN);
+		if (fichero.exists()) {
+			System.out.println("Introduzca Nombre del Directorio Nuevo");
+			rutaF = new Scanner(System.in);
+			String rutaNC = rutaF.next();
+			File directorio = new File(rutaCN, rutaNC);
 			directorio.mkdir();
 			return true;
 		} else {
@@ -101,15 +157,15 @@ public class Main {
 	}
 
 	private static ArrayList<String> imprimirContenidoDirectorioExtension(
-			String sTexto5, String extension2) {
-		crearFichero(sTexto5);
+			String rutaDir, String rutaEx) {
+		File fichero = new File(rutaDir);
 		ArrayList<String> lista = new ArrayList<>();
-		if (f.exists()) {
-			String[] ficheros = f.list();
+		if (fichero.exists()) {
+			String[] ficheros = fichero.list();
 			for (int i = 0; i < ficheros.length; i++) {
-				String fichero = ficheros[i];
-				if (fichero.indexOf(extension2) != -1) {
-					lista.add(fichero);
+				String fichero2 = ficheros[i];
+				if (fichero2.indexOf(rutaEx) != -1) {
+					lista.add(fichero2);
 				}
 			}
 
@@ -117,17 +173,11 @@ public class Main {
 		return lista;
 
 	}
-	
-	/**
-	 * 
-	 * @param sTexto4
-	 * @return
-	 */
 
-	private static String imprimirContenidoDirectorio(String sTexto4) {
-		crearFichero(sTexto4);
+	private static String imprimirContenidoDirectorio(String rutaD) {
+		File directorio = new File(rutaD);
 		String s = null;
-		String[] archivos = f.list();
+		String[] archivos = directorio.list();
 
 		for (int j = 0; j < archivos.length; j++) {
 			s += archivos[j];
@@ -135,49 +185,37 @@ public class Main {
 		}
 
 		return s;
+
 	}
 
-	private static String ruta(boolean absoluta) {
+	private static String ruta(boolean absoluta, String ruta) {
+		File fichero = new File(ruta);
 		if (absoluta) {
-			return f.getAbsolutePath();
+			return fichero.getAbsolutePath();
 		} else
-			return f.getPath();
-
-	}
-		/**
-	 * 
-	 * @param sTexto3
-	 * @return
-	 */
-
-	private static boolean absoluta(String sTexto3) {
-		crearFichero(sTexto3);
-		if (!f.getAbsolutePath().equalsIgnoreCase(" ")) {
-			return true;
-		} else
-			return false;
+			return fichero.getPath();
 
 	}
 
-	public static String[] datosFicheros(String sTexto2) {
-		crearFichero(sTexto2);
+	static String[] datosFichero(String ficheroDatos) {
+		File fichero = new File(ficheroDatos);
 		String array[] = new String[6];
-		array[0] = f.getName();
-		array[1] = f.getAbsolutePath();
-		if (f.canRead()) {
+		array[0] = fichero.getName();
+		array[1] = fichero.getAbsolutePath();
+		if (fichero.canRead()) {
 			array[2] = "True";
 		} else
 			array[2] = "False";
 
-		if (f.canWrite()) {
+		if (fichero.canWrite()) {
 			array[3] = "True";
 		} else
 			array[3] = "False";
 
-		int tamano = (int) f.length();
+		int tamano = (int) fichero.length();
 		array[4] = Integer.toString(tamano);
 
-		array[5] = f.getParent();
+		array[5] = fichero.getParent();
 
 		for (int i = 0; i < 6; i++) {
 			System.out.println(array[i]);
@@ -188,25 +226,12 @@ public class Main {
 
 	}
 
-	public static boolean existeFichero(String fichero) {
-		crearFichero(fichero);
-		if (f.exists()) {
-			System.out.println("Existe");
+	static boolean existeFichero(String fichero) {
+		File fich = new File(fichero);
+		if (fich.exists()) {
 			return true;
-		} else
-			System.out.println("NO existe");
+		}
 		return false;
-	}
-
-	public static void crearFichero(String fichero) {
-		f = new File(fichero);
-	}
-
-	public static String introducirRuta() {
-		System.out.println("Indique la Ruta.");
-		Scanner reader = new Scanner(System.in);
-		sTexto = reader.next();
-		return sTexto;
 	}
 
 }

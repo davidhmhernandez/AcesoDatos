@@ -34,7 +34,7 @@ public class ActJUni22 {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		String[] datos = Main.datosFicheros(fichero2);
+		String[] datos = Main.datosFichero(fichero2);
 		assertEquals(6, datos.length);
 		assertEquals(f2.getName(), datos[0]);
 		assertEquals(f2.getAbsolutePath(), datos[1]);
@@ -51,7 +51,7 @@ public class ActJUni22 {
 	}
 	@Test
 	public void datosFichero2() {
-		String[] datos = Main.datosFicheros("supercalifragilistico");
+		String[] datos = Main.datosFichero("supercalifragilistico");
 
 		assertEquals(6, datos.length);
 		assertEquals("supercalifragilistico", datos[0]);
