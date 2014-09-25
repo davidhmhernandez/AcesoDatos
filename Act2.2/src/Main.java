@@ -1,9 +1,12 @@
+import java.io.BufferedReader;
+import java.io.DataInputStream;
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.Scanner;
-
-import javax.management.openmbean.OpenDataException;
 
 public class Main {
 	private static Scanner rutaF;
@@ -12,8 +15,9 @@ public class Main {
 
 	/**
 	 * @param args
+	 * @throws IOException 
 	 */
-	public static void main(String[] args) {
+	public static void main(String[] args) throws IOException {
 		System.out.println("Introduzca Ruta del Fichero");
 		rutaF = new Scanner(System.in);
 		String fichero = rutaF.next();
@@ -97,6 +101,36 @@ public class Main {
 		System.out.println("Leer Texto");
 		System.out.println(leerLinea());
 
+		System.out.println("");
+		System.out.println("Leer Archivo Buffer");
+		System.out.println(leerLineaBufer());
+
+	}
+
+	private static String leerLineaBufer() throws IOException {
+		String s = null;
+		System.out.println("Introduzca el Archivo");
+		rutaF = new Scanner(System.in);
+		String rutaAr = rutaF.next();
+		try {
+			FileInputStream fis = new FileInputStream(rutaAr);
+			DataInputStream dis = new DataInputStream(fis);
+			BufferedReader buffer = new BufferedReader(new InputStreamReader(
+					dis));
+			 String linea;
+			 
+			
+				while ((linea = buffer.readLine()) != null)   {
+				        // Imprimimos la línea por pantalla
+				        s += linea;
+				        s += "\n";
+				    }
+			dis.close();
+		} catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			 System.out.println("Error: " + e.getMessage());
+		}
+		return s;
 	}
 
 	private static String leerLinea() {
