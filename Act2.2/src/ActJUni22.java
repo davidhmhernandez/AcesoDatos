@@ -49,6 +49,54 @@ public class ActJUni22 {
 		f2.delete();
 
 	}
-	
+	@Test
+	public void ruta(){
+		String fichero = "prueba3";
+		File f = new File(fichero);
+		try {
+			f.createNewFile();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 
+		assertEquals(f.getAbsolutePath(), Main.ruta(true, fichero));
+		assertEquals(null, Main.ruta(true,"Davidddd"));
+		f.delete();
+	}
+	
+	@Test
+	public void imprimirContenido(){
+		String fichero = "prueba3";
+		File f = new File(fichero);
+		try {
+			f.createNewFile();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		
+		assertArrayEquals(f.list(), Main.imprimirContenidoDirectorio(fichero));
+		assertArrayEquals(null, Main.imprimirContenidoDirectorio("UUUU"));
+		f.delete();
+	}
+	
+	@Test
+	public void imprimirContenidoExtension(){
+		String fichero = "prueba3";
+		String extension =".txt";
+		File f = new File(fichero+extension);
+		try {
+			f.createNewFile();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		
+		assertEquals("prueba3.txt", Main.imprimirContenidoDirectorioExtension(fichero,extension));
+		assertEquals("", Main.imprimirContenidoDirectorioExtension("UUUU",".txt"));
+		f.delete();
+	}
 }

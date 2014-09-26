@@ -15,7 +15,7 @@ public class Main {
 
 	/**
 	 * @param args
-	 * @throws IOException 
+	 * @throws IOException
 	 */
 	public static void main(String[] args) throws IOException {
 		System.out.println("Introduzca Ruta del Fichero");
@@ -117,18 +117,17 @@ public class Main {
 			DataInputStream dis = new DataInputStream(fis);
 			BufferedReader buffer = new BufferedReader(new InputStreamReader(
 					dis));
-			 String linea;
-			 
-			
-				while ((linea = buffer.readLine()) != null)   {
-				        // Imprimimos la línea por pantalla
-				        s += linea;
-				        s += "\n";
-				    }
+			String linea;
+
+			while ((linea = buffer.readLine()) != null) {
+				// Imprimimos la línea por pantalla
+				s += linea;
+				s += "\n";
+			}
 			dis.close();
 		} catch (FileNotFoundException e) {
 			// TODO Auto-generated catch block
-			 System.out.println("Error: " + e.getMessage());
+			System.out.println("Error: " + e.getMessage());
 		}
 		return s;
 	}
@@ -190,7 +189,7 @@ public class Main {
 		}
 	}
 
-	private static ArrayList<String> imprimirContenidoDirectorioExtension(
+	public static ArrayList<String> imprimirContenidoDirectorioExtension(
 			String rutaDir, String rutaEx) {
 		File fichero = new File(rutaDir);
 		ArrayList<String> lista = new ArrayList<>();
@@ -202,33 +201,37 @@ public class Main {
 					lista.add(fichero2);
 				}
 			}
+			return lista;
 
-		}
-		return lista;
+		}else return null;
+		
 
 	}
 
-	private static String imprimirContenidoDirectorio(String rutaD) {
+	public static String[] imprimirContenidoDirectorio(String rutaD) {
 		File directorio = new File(rutaD);
-		String s = null;
+
 		String[] archivos = directorio.list();
+		if (directorio.exists()) {
 
-		for (int j = 0; j < archivos.length; j++) {
-			s += archivos[j];
-			s += "\n";
-		}
+			return archivos;
 
-		return s;
+		} else
+			return null;
 
 	}
 
-	private static String ruta(boolean absoluta, String ruta) {
+	public static String ruta(boolean absoluta, String ruta) {
 		File fichero = new File(ruta);
-		if (absoluta) {
-			return fichero.getAbsolutePath();
-		} else
-			return fichero.getPath();
+		if (!fichero.exists()) {
+			System.out.println("");
+		} else {
+			if (absoluta) {
+				return fichero.getAbsolutePath();
+			}
 
+		}
+		return null;
 	}
 
 	static String[] datosFichero(String ficheroDatos) {
