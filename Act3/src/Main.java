@@ -24,6 +24,11 @@ public class Main {
 		;
 	}
 
+	/**
+	 * Metodo para Leer un Archivo.
+	 * Le pasamos el @param path que es la ruta del Archivo
+	 * Y el @param numero que es el Numero de Carácteres que Queremos Imprimir por pantalla
+	 */
 	private static void readTextFile(String path, int numero) {
 		try {
 			FileReader fichero = new FileReader(path);
@@ -44,11 +49,18 @@ public class Main {
 					.println("El Archivo está protegido contra sobreescritura.");
 		}
 	}
+	
+	/**
+	 * Metodo Para Leer un Fichero e Imprimirlo Por Pantalla
+	 * Le pasamos el @param path que es la ruta del fichero
+	 * Este metodo devuelve un String con el contenido del fichero
+	 * 
+	 */
 
 	private static String readTextFile(String path)
 			throws FileNotFoundException {
 		FileReader fichero = null;
-		String s = null;
+		String s = " ";
 
 		try {
 			System.out.println("Leyendo " + path);
