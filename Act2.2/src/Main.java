@@ -140,7 +140,7 @@ public class Main {
 
 	}
 
-	private static boolean touch(String rutaAr) {
+	public static boolean touch(String rutaAr) {
 		File f = new File(rutaAr);
 		if (f.exists()) {
 			System.out.println("Introduzca Nombre del Archivo");
@@ -159,7 +159,7 @@ public class Main {
 		return true;
 	}
 
-	private static boolean renombraFichero(String rutaFich) {
+	public static boolean renombraFichero(String rutaFich) {
 		File f = new File(rutaFich);
 		if (f.exists()) {
 			System.out.print("Nombre de archivo nuevo: ");
@@ -175,7 +175,7 @@ public class Main {
 
 	}
 
-	private static boolean creaDirectorio(String rutaCN) {
+	public static boolean creaDirectorio(String rutaCN) {
 		File fichero = new File(rutaCN);
 		if (fichero.exists()) {
 			System.out.println("Introduzca Nombre del Directorio Nuevo");

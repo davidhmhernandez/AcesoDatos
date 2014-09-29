@@ -99,4 +99,32 @@ public class ActJUni22 {
 		assertEquals("", Main.imprimirContenidoDirectorioExtension("UUUU",".txt"));
 		f.delete();
 	}
+	@Test
+	public void crearDirectorio(){
+		String fichero = "prueba4";
+		
+		File f = new File(fichero);
+		f.mkdir();
+		
+		assertEquals("prueba4", Main.creaDirectorio(fichero));
+		assertEquals("", Main.creaDirectorio("UUUU"));
+		f.delete();
+	}
+	@Test
+	public void crearArchivoVacio(){
+		String fichero = "prueba5";
+		
+		File f = new File(fichero);
+		try {
+			f.createNewFile();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		assertEquals("prueba5", Main.touch(fichero));
+		assertEquals("", Main.touch("UUUU"));
+		f.delete();
+	}
+
 }
