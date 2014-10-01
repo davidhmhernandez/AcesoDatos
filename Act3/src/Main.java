@@ -1,6 +1,7 @@
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
+import java.nio.Buffer;
 import java.util.Scanner;
 
 public class Main {
@@ -25,9 +26,9 @@ public class Main {
 	}
 
 	/**
-	 * Metodo para Leer un Archivo.
-	 * Le pasamos el @param path que es la ruta del Archivo
-	 * Y el @param numero que es el Numero de Carácteres que Queremos Imprimir por pantalla
+	 * Metodo para Leer un Archivo. Le pasamos el @param path que es la ruta del
+	 * Archivo Y el @param numero que es el Numero de Carácteres que Queremos
+	 * Imprimir por pantalla
 	 */
 	private static void readTextFile(String path, int numero) {
 		try {
@@ -35,7 +36,7 @@ public class Main {
 
 			int i;
 			int contador = -1;
-			while ((i = fichero.read()) != -1) { 
+			while ((i = fichero.read()) != -1) {
 				System.out.print((char) i);
 				contador++;
 				if (contador % numero == 0) {
@@ -49,11 +50,11 @@ public class Main {
 					.println("El Archivo está protegido contra sobreescritura.");
 		}
 	}
-	
+
 	/**
-	 * Metodo Para Leer un Fichero e Imprimirlo Por Pantalla
-	 * Le pasamos el @param path que es la ruta del fichero
-	 * Este metodo devuelve un String con el contenido del fichero
+	 * Metodo Para Leer un Fichero e Imprimirlo Por Pantalla Le pasamos el @param
+	 * path que es la ruta del fichero Este metodo devuelve un String con el
+	 * contenido del fichero
 	 * 
 	 */
 
