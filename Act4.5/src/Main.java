@@ -28,6 +28,10 @@ public class Main {
 		declaracion();
 
 	}
+	
+	/**
+	 * Metodo en el cual le decimos donde crearemos el Archivo
+	 */
 
 	private static void declaracion() {
 		// Indicamos donde esta el archivo
@@ -37,6 +41,10 @@ public class Main {
 		nombrefichero2 = new File(nombrefichero);
 		escribirFutbolistas();
 	}
+	
+	/**
+	 * Metodo que escribe el nombre de los futbolistas linea a linea
+	 */
 
 	private static void escribirFutbolistas() {
 		FileWriter fw=null;
