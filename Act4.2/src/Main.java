@@ -8,6 +8,8 @@ import java.util.Scanner;
 public class Main {
 
 	private static Scanner sc;
+	static FileWriter fw;
+	static BufferedWriter bf;
 
 	/**
 	 * @param args
@@ -17,17 +19,21 @@ public class Main {
 
 	}
 	
+	/**
+	 * Metodo que Instancia el Fichero
+	 */
+	
 	private static void instanciarFichero() {
 		String ruta = "fichero.txt";
 		File f = new File(ruta);
 
 		try {
-			FileWriter fw = new FileWriter(f);
-			BufferedWriter bf = new BufferedWriter(fw);
+			fw = new FileWriter(f);
+			bf = new BufferedWriter(fw);
 			System.out.println("Introduzca un Numero");
 			sc = new Scanner(System.in);
 			int m= sc.nextInt();
-			calcularFibonacci(m,bf);
+			calcularFibonacci(m);
 
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
@@ -35,8 +41,13 @@ public class Main {
 		}
 		
 	}
+	
+	/**
+	 * Metodo que Calcula la serie Fibonacci y la escribe en el Fichero
+	 * @param m
+	 */
 
-	public static void calcularFibonacci(int m, BufferedWriter bf) throws IOException{
+	public static void calcularFibonacci(int m){
 		int acumulador = 1;
 		int acumulador2 = 0;
 		for (int i = 0; i < m; i++) {
@@ -44,11 +55,26 @@ public class Main {
 			acumulador2 = acumulador;
 			acumulador = total;
 			String acu = Integer.toString(acumulador2);
-			bf.write(acu);
-			bf.newLine();
+			try {
+				bf.write(acu);
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			try {
+				bf.newLine();
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 
 		}
-		bf.close();
+		try {
+			bf.close();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 
 
