@@ -20,12 +20,7 @@ public class Main {
 	 */
 	public static void main(String[] args) {
 		if (f.exists()) {
-			try {
-				calcularFibonacci(f);
-			} catch (IOException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
+			calcularFibonacci(f);
 		} else {
 			instanciarFichero();
 		}
@@ -56,7 +51,7 @@ public class Main {
 	 * @throws IOException
 	 */
 
-	public static void calcularFibonacci(File f) throws IOException {
+	public static void calcularFibonacci(File f)  {
 		System.out.println("Introduzca un Numero");
 		sc = new Scanner(System.in);
 		int m = sc.nextInt();
@@ -76,11 +71,26 @@ public class Main {
 			acumulador2 = acumulador;
 			acumulador = total;
 			String acu = Integer.toString(acumulador2);
-			out.write(acu);
+			try {
+				out.write(acu);
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 			
 		}
-		out.newLine();
-		out.close();
+		try {
+			out.newLine();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		try {
+			out.close();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 
 }
