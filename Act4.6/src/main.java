@@ -28,6 +28,10 @@ public class main {
 		declaracion();
 
 	}
+	
+	/**
+	 * Metodo donde Declaramos el Archivo con extension .csv
+	 */
 
 	private static void declaracion() {
 		// Indicamos donde esta el archivo
@@ -37,6 +41,10 @@ public class main {
 		nombrefichero2 = new File(nombrefichero+".csv");
 		escribirFutbolistas();
 	}
+	
+	/**
+	 * Metodo que escribe el nombre de los Futbolistas separados por coma y punto
+	 */
 
 	private static void escribirFutbolistas() {
 		FileWriter fw=null;
