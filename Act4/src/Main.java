@@ -4,6 +4,10 @@ import java.io.FileWriter;
 import java.io.IOException;
 
 public class Main {
+	static String ruta = "fichero.txt";
+	static File f = new File(ruta);
+	static FileWriter fw;
+	static BufferedWriter bf;
 
 	/**
 	 * @param args
@@ -18,13 +22,12 @@ public class Main {
 	 */
 
 	private static void instaciarFichero() {
-		String ruta = "fichero.txt";
-		File f = new File(ruta);
+		
 
 		try {
-			FileWriter fw = new FileWriter(f);
-			BufferedWriter bf = new BufferedWriter(fw);
-			calcularFibonacci(bf);
+		 fw = new FileWriter(f);
+		bf = new BufferedWriter(fw);
+			calcularFibonacci();
 
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
@@ -35,11 +38,9 @@ public class Main {
 	/**
 	 * Metodo que calcula la serie Fibonacci
 	 * 
-	 * @param bf
-	 * @throws IOException
 	 */
 
-	private static void calcularFibonacci(BufferedWriter bf) throws IOException {
+	private static void calcularFibonacci()  {
 		int acumulador = 1;
 		int acumulador2 = 0;
 		for (int i = 0; i < 5; i++) {
@@ -47,23 +48,27 @@ public class Main {
 			acumulador2 = acumulador;
 			acumulador = total;
 			String acu = Integer.toString(acumulador2);
-			escribirFichero(bf, acu);
+			try {
+				bf.write(acu);
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			try {
+				bf.newLine();
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 
 		}
-		bf.close();
+		try {
+			bf.close();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 
-	/**
-	 * Metodo que escribe en el fichero
-	 * @param bf
-	 * @param acu
-	 * @throws IOException
-	 */
-	
-	private static void escribirFichero(BufferedWriter bf, String acu)
-			throws IOException {
-		bf.write(acu);
-		bf.newLine();
-	}
 
 }
