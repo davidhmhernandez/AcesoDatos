@@ -4,8 +4,8 @@ import java.io.FileWriter;
 import java.io.IOException;
 
 public class Main {
-	static String ruta = "fichero.txt";
-	static File f = new File(ruta);
+	static final String RUTA = "fichero.txt";
+	static File f = new File(RUTA);
 	static FileWriter fw;
 	static BufferedWriter bf;
 
@@ -63,7 +63,7 @@ public class Main {
 
 		}
 		try {
-			bf.close();
+			if (bf!=null)bf.close();
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
